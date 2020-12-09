@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root {
+    --default-font: 'Bellota Text', sans-serif;
+    --light-theme-color: hsl(229, 100%, 90%);
+    --med-theme-color: hsl(230, 80%, 78%);
+    --deep-theme-color: hsl(230, 69%, 70%);
+}
+* {
+    box-sizing: border-box;
+}
+#demo {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+html, body, #root, .App {
+    font-family: 'Bellota Text';
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+}
+input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+}
+input[type=text], input[type=password], input[type=number] {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 1rem 1rem;
+    margin: 0.5rem auto 1rem;
+    border-radius: 0.5rem;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+    border-color: var(--med-theme-color);
+    box-shadow: 4px 4px 0px var(--light-theme-color), -4px 4px 0px var(--light-theme-color), 4px -4px 0px var(--light-theme-color), -4px -4px 0px var(--light-theme-color);
+    box-shadow: 0 0 1rem var(--light-theme-color);
+    box-shadow: none;
+}
+input[type=submit], button {
+    cursor: pointer;
+    font-weight: bold;
+    width: auto;
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 0;
+    background: var(--med-theme-color);
+    border-radius: 0.5rem;
+    color: #fff;
+}
+button.stealth {
+    background: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+button.link {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: inherit;
+    color: var(--deep-theme-color);
+}
+.App {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #aaebff, #d3c7ff)
+}
+.Canvas {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    background: #ddd;
+    border-radius: 30px;
+    border: 15px solid #fff;
+    box-shadow: 0 0 3.5vh rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.user {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.userAvatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #aaa;
+    cursor: pointer;
+}
+.player .userAvatar {
+    background: teal;
+}
+.userLabel {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate3d(-50%, 10px, 0);
+    background: #fff;
+    display: block;
+    border-radius: 999px;
+    max-width: 100px;
+    padding: 2px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'Fantasque Sans Mono';
+    font-size: 12px;
+    user-select: none;
+}
+.player .userLabel {
+    background: #dafff6;
+}
+.Guest {
+    width: 1000px;
+    height: 600px;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 4rem;
+    text-align: center;
+}
+.Guest h1 {
+    text-align: left;
+}
+.Guest form {
+    margin-bottom: 1.5rem;
+}
+.Guest label {
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    display: block;
+    text-align: left;
+}
+.Guest input[type=text], .Guest input[type=password] {
+    display: block;
+    width: 100%;
+}
+.Setup {
+    display: grid;
+    background: #fff;
+    padding: 2.5rem;
+    grid-template-columns: 200px 1fr;
+    border: 0;
+}
+.Setup h2 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+.Setup .avatarPreview {
+    position: relative;
+    text-align: center;
+}
+.Setup .avatarConfig {
+    padding-left: 2.5rem;
+    border-left: 1px solid #ccc;
+    margin-left: 2.5rem;
+    overflow: auto;
+}
+.Setup .bodyPreview {
+    display: inline-block;
+    width: 50px;
+    cursor: pointer;
+}
+.bodyPreview + .bodyPreview {
+    margin-left: 0.5rem;
+}
+.avatarPreview .bodyLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+svg:not(.bodyLayer) path {
+    transition: fill 0.15s;
+}
