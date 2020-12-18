@@ -9,8 +9,8 @@ const User = mongoose.model(
         password: String,
         //isVerified: Boolean,
         avatar: {
-            body: String,
-            pattern: String,
+            bodyColor: String,
+            faceAccessory: String,
             eyes: String,
             mouth: String,
             headAccessory: String

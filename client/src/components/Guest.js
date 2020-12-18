@@ -42,8 +42,8 @@ class Login extends Component {
         const body = await response.json();
         if (!body) return console.log('server error'); //todo better all of this
         if (!body.success) return console.log('there was an error');
-        const userData = body.userData;
-        if (userData) this.props.enableGameWindow(userData);
+        const { user } = body;
+        if (user) this.props.enableGameWindow(user);
     }
     render() {
         return (
@@ -79,8 +79,8 @@ class Signup extends Component {
         const body = await response.json();
         if (!body) return console.log('server error'); //todo better all of this
         if (!body.success) return console.log('there was an error');
-        const token = body.accessToken;
-        if (token) this.props.enableGameWindow();
+        const { accessToken: token, userData: user } = body;
+        if (token) this.props.enableGameWindow(user);
     }
     render() {
         return (

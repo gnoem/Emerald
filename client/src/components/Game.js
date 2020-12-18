@@ -9,21 +9,21 @@ function Game(props) {
     const [ lastMovedUser, updateLastMovedUser ] = useState('');
     const [ users, updateUsers ] = useState([]);
     useEffect(() => {
-        socket.emit('user-connected', props.userData);
+        socket.emit('user-connected', props.user);
         socket.emit('hey', (onlineUsers) => {
             const whosOnline = [];
             onlineUsers.forEach(onlineUser => {
-                const { id, userData, coordinates } = onlineUser;
-                const instance = <User userData={userData} key={id} id={id} position={coordinates} />;
-                whosOnline.push({ id, userData, instance, coordinates });
+                const { id, user, coordinates } = onlineUser;
+                const instance = <User user={user} key={id} id={id} position={coordinates} />;
+                whosOnline.push({ id, user, instance, coordinates });
             });
             updateUsers(whosOnline);
         });
-        socket.on('user-connected', ({ id, userData }) => {
+        socket.on('user-connected', ({ id, user }) => {
             if (id === socket.id) return;
             console.log(`A user ${id} connected!`);
-            const newUser = <User userData={userData} key={id} id={id} position={{ x: 0, y: 0 }} />;
-            updateUsers(userList => [...userList, { id, userData, instance: newUser, coordinates: { x: 0, y: 0 } }]);
+            const newUser = <User user={user} key={id} id={id} position={{ x: 0, y: 0 }} />;
+            updateUsers(userList => [...userList, { id, user, instance: newUser, coordinates: { x: 0, y: 0 } }]);
         });
         socket.on('user-disconnected', (id) => {
             console.log('A user disconnected');
@@ -35,9 +35,9 @@ function Game(props) {
             updateUsers(userList => {
                 const thisUser = userList.find(user => user.id === id);
                 const thisUserIndex = userList.findIndex(user => user.id === id);
-                const userData = thisUser.instance.props.userData;
+                const user = thisUser.instance.props.user;
                 thisUser.coordinates = coordinates;
-                thisUser.instance = <User userData={userData} key={id} id={id} position={coordinates} />;
+                thisUser.instance = <User user={user} key={id} id={id} position={coordinates} />;
                 userList[thisUserIndex] = thisUser;
                 return userList;
             });
@@ -47,7 +47,8 @@ function Game(props) {
     }, []);
     return (
         <div className="Game">
-            <Canvas users={users} playerData={props.userData} socket={socket} lastMovedUser={lastMovedUser} />
+            <div id="demo" onClick={() => console.dir(props.user)}></div>
+            <Canvas users={users} playerData={props.user} socket={socket} lastMovedUser={lastMovedUser} />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Body, Eyes, Mouth, FaceAccessory } from './Avatar';
 
 class User extends Component {
     constructor(props) {
@@ -56,7 +57,9 @@ class User extends Component {
         });
     }
     render() {
-        let { type, id, userData, position } = this.props;
+        console.dir(this.props);
+        let { type, id, user, position } = this.props;
+        const { avatar } = user;
         let { coordinates } = this.state;
         let userPosition = {
             x: (type === 'player') ? coordinates.x : position.x,
@@ -66,8 +69,12 @@ class User extends Component {
         return (
             <div ref={this.User} className={`${type} user`} data-id={id} style={{transform: `translate3d(${userPosition.x * 20}px, ${userPosition.y * 20}px, 0)`}}>
                 <div className="userAvatar">
+                    <Body color={avatar.bodyColor} />
+                    <Eyes id={avatar.eyes} />
+                    <Mouth id={avatar.mouth} />
+                    <FaceAccessory id={avatar.faceAccessory} />
                     <span className="userLabel">
-                        {userData.username}
+                        {user.username}
                     </span>
                 </div>
             </div>

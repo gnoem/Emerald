@@ -11,19 +11,20 @@ class App extends Component {
             isLoggedIn: false
         }
     }
-    updateUserData = (userData) => {
-        this.setState({ isLoggedIn: userData });
+    updateUserData = (user) => {
+        this.setState({ isLoggedIn: user });
     }
     render() {
         const { isLoggedIn } = this.state;
         const noAvatarData = () => {
-            return JSON.stringify(isLoggedIn.avatar) === '{}';
+            if (!isLoggedIn.avatar) return true;
+            if (JSON.stringify(isLoggedIn.avatar) === '{}') return true;
         }
         const firstTime = (isLoggedIn && noAvatarData());
         const app = () => {
-            if (!isLoggedIn) return <Guest enableGameWindow={(userData) => this.updateUserData(userData)} />;
-            if (firstTime) return <UserSetup updateUserData={(userData) => this.updateUserData(userData)} userData={isLoggedIn} />;
-            return <Game userData={isLoggedIn} />
+            if (!isLoggedIn) return <Guest enableGameWindow={this.updateUserData} />;
+            if (firstTime) return <UserSetup updateUserData={this.updateUserData} user={isLoggedIn} />;
+            return <Game user={isLoggedIn} />
         }
         return (
             <div className="App">

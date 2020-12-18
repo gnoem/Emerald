@@ -16,9 +16,9 @@ io.on('connection', (socket) => {
     socket.on('hey', (cb) => {
         cb(users);
     });
-    socket.on('user-connected', (userData) => {
-        users.push({ id: socket.id, userData, coordinates: { x: 0, y: 0 } });
-        io.emit('user-connected', { id: socket.id, userData });
+    socket.on('user-connected', (user) => {
+        users.push({ id: socket.id, user, coordinates: { x: 0, y: 0 } });
+        io.emit('user-connected', { id: socket.id, user });
         console.log(`Client ${socket.id} connected`);
     });
     socket.on('disconnect', () => {

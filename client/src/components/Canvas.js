@@ -4,12 +4,11 @@ import { Player } from './User';
 class Canvas extends Component {
     componentDidMount() {
         this.createPlayer();
-        document.querySelector('#demo').addEventListener('click', () => console.dir(this.props));
     }
     createPlayer = () => {
         const { socket, playerData } = this.props;
         return (
-            <Player userData={playerData} id={socket.id} socket={socket} position={{ x: 0, y: 0 }} />
+            <Player user={playerData} id={socket.id} socket={socket} position={{ x: 0, y: 0 }} />
         )
     }
     render() {

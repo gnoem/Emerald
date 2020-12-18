@@ -27,13 +27,15 @@ class UserSetup extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = this.state.preview;
+        const { user } = this.props;
+        console.dir(this.props);
+        const avatar = this.state.preview;
         const response = await fetch('/edit/avatar', {
-            type: 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({ _id: user._id, avatar })
         });
         const body = await response.json();
         if (!body) return console.log('server error');

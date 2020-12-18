@@ -94,14 +94,16 @@ button.link {
 }
 .userAvatar {
     position: relative;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #aaa;
+    width: 42px;
+    height: 63px;
     cursor: pointer;
 }
-.player .userAvatar {
-    background: teal;
+.userAvatar svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .userLabel {
     position: absolute;
