@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 class Body extends Component {
     render() {
+        if (this.props.orientation === 'e' || this.props.orientation === 'w') return (
+            <svg viewbox="0 0 42 63">
+                <path style={{ fill: this.props.color }} d="M11.4,36.8c-0.1-2.3,0-3.9,0-4.4c0.1-3.4,0.2-5.1,0.7-6.9c1-3.4,2.9-5.2,3.6-5.6c0.9-0.5,1.9-0.8,1.9-0.8
+                    s0.2,0,0.4-0.1c8.9-1.4,11.3,3.2,11.3,3.2c1.6,3,1.6,7.4,1.6,7.6c0.1,2.2-0.2,3.4,0,6.4c0.1,1.3-0.6,11.4-0.7,12.4
+                    c-0.2,1.8-0.4,4.4-1.7,5.9c-0.7,0.8-1.3,1.3-1.3,1.3c-1.3,0.9-1.6,0.7-2.2,1.3c-1.3,1.2-0.3,2.9-1.6,3.8c-0.5,0.4-1.2,0.5-1.8,0.3
+                    c-0.8-0.3-1.1-1.1-1.3-1.5c-0.2-0.5-0.2-0.7-0.5-1.5c-0.2-0.5-0.3-0.8-0.5-1c-0.7-0.9-1.8-0.4-3-1c-0.8-0.4-1.1-1-1.8-2.3
+                    c-0.8-1.3-1.1-2.6-1.4-3.9c-0.2-0.7-0.3-1.2-0.3-1.4C11.6,43.2,11.4,36.8,11.4,36.8z"/>
+            </svg>
+        )
         return (
             <svg viewBox="0 0 42 63">
                 <path style={{ fill: this.props.color }} d="M36.8,36.2c0.2,1.3,0.1,2.3,0.8,2.9c0.9,0.8,1.7,1.8,2.3,2.8c0.9,1.4,0.9,3,0.5,4.6c-0.3,1.3-2.1,2.1-3.8,1.7
@@ -18,6 +27,7 @@ class Body extends Component {
 
 class Eyes extends Component {
     render() {
+        if (this.props.orientation !== 's') return null;
         switch(this.props.id) {
             case 'eyes1': {
                 return (
@@ -67,6 +77,7 @@ class Eyes extends Component {
 
 class Mouth extends Component {
     render() {
+        if (this.props.orientation !== 's') return null;
         switch(this.props.id) {
             case 'mouth1': {
                 return (
@@ -99,6 +110,7 @@ class Mouth extends Component {
 
 class FaceAccessory extends Component {
     render() {
+        if (this.props.orientation !== 's') return null;
         switch (this.props.id) {
             case 'fa1': {
                 return (

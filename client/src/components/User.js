@@ -10,7 +10,8 @@ class User extends Component {
             coordinates: { // player only - other users get position object from props
                 x: position.x,
                 y: position.y
-            }
+            },
+            orientation: 's'
         }
         if (type === 'player') this.initMovement();
     }
@@ -27,10 +28,22 @@ class User extends Component {
     }
     initMovement = () => {
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowUp') this.move('y', -1);
-            if (e.key === 'ArrowDown') this.move('y', 1);
-            if (e.key === 'ArrowLeft') this.move('x', -1);
-            if (e.key === 'ArrowRight') this.move('x', 1);
+            if (e.key === 'ArrowUp') {
+                this.setState({ orientation: 'n' });
+                this.move('y', -1);
+            }
+            if (e.key === 'ArrowDown') {
+                this.setState({ orientation: 's' });
+                this.move('y', 1);
+            }
+            if (e.key === 'ArrowLeft') {
+                this.setState({ orientation: 'w' });
+                this.move('x', -1);
+            }
+            if (e.key === 'ArrowRight') {
+                this.setState({ orientation: 'e' });
+                this.move('x', 1);
+            }
         });
     }
     isMoveAllowed = (axis, direction) => { // todo max coordinates
@@ -57,7 +70,6 @@ class User extends Component {
         });
     }
     render() {
-        console.dir(this.props);
         let { type, id, user, position } = this.props;
         const { avatar } = user;
         let { coordinates } = this.state;
@@ -67,14 +79,11 @@ class User extends Component {
         }
         if (!type) type = '';
         return (
-            <div ref={this.User} className={`${type} user`} data-id={id} style={{transform: `translate3d(${userPosition.x * 20}px, ${userPosition.y * 20}px, 0)`}}>
+            <div ref={this.User} className={`${type} user`} data-id={id} style={{transform: `translate3d(${userPosition.x * 10}px, ${userPosition.y * 10}px, 0)`}}>
                 <div className="userAvatar">
-                    <Body color={avatar.bodyColor} />
-                    <Eyes id={avatar.eyes} />
-                    <Mouth id={avatar.mouth} />
-                    <FaceAccessory id={avatar.faceAccessory} />
+                    <Avatar {...avatar} orientation={this.state.orientation} />
                     <span className="userLabel">
-                        {user.username}
+                        {user.username} - {this.state.orientation}
                     </span>
                 </div>
             </div>
@@ -88,6 +97,19 @@ class Player extends Component {
             <User type="player" {...this.props} />
         )
     }
+}
+
+
+function Avatar(props) {
+    const { orientation, bodyColor, eyes, mouth, faceAccessory } = props;
+    return (
+        <>
+            <Body color={bodyColor} orientation={orientation} />
+            <Eyes id={eyes} orientation={orientation} />
+            <Mouth id={mouth} orientation={orientation} />
+            <FaceAccessory id={faceAccessory} orientation={orientation} />
+        </>
+    )
 }
 
 export { Player, User }
