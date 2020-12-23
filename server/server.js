@@ -8,7 +8,7 @@ const io = require('socket.io')(server);
 
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-const users = [];
+/* const users = [];
 const getIndex = (id) => {
     return users.findIndex(user => user.id === id);
 }
@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
         users[index].coordinates = coordinates;
         io.emit('user-move', { id: socket.id, coordinates });
     });
-});
+}); // */
 
 app.use(cookieParser());
 app.use(bodyParser.json());
